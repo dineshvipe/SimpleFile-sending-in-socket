@@ -29,7 +29,9 @@ public class FileServer extends Thread {
 
 	private void saveFile(Socket clientSock) throws IOException {
 		DataInputStream dis = new DataInputStream(clientSock.getInputStream());
-		FileOutputStream fos = new FileOutputStream("dinesh.py");
+		String name=dis.readUTF();
+		System.out.println(name);
+		FileOutputStream fos = new FileOutputStream(name);
 		byte[] buffer = new byte[4096];
 		
 		int filesize = 15123; // Send file size in separate msg
