@@ -2,6 +2,8 @@ import java.io.DataOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class FileClient {
 	
@@ -18,6 +20,8 @@ public class FileClient {
 	
 	public void sendFile(String file) throws IOException {
 		DataOutputStream dos = new DataOutputStream(s.getOutputStream());
+		Path p=Paths.get(file);
+		dos.writeUTF(p.getFileName().toString());
 		FileInputStream fis = new FileInputStream(file);
 		byte[] buffer = new byte[file.length()];
 		
@@ -29,8 +33,6 @@ public class FileClient {
 		dos.close();	
 	}
 	
-	public static void main(String[] args) {
-		FileClient fc = new FileClient("localhost", 1988, "test2.py");
-	}
+
 
 }
